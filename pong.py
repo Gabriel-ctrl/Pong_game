@@ -1,16 +1,17 @@
 import turtle
 
+#fazendo a tela do jogo
 wn = turtle.Screen()
 wn.title("Pong")
 wn.bgcolor("black")
 wn.setup(width=800, height=600)
 wn.tracer(0)
-# Score
+# Score - placares
 score_a = 0
 score_b = 0
 
 
-##Paddle A 
+##Paddle A - objeto retangular que é usado para jogar
 paddle_a = turtle.Turtle()
 #velocidade da animação
 #no 0 é o maximo de vel. de animação
@@ -34,7 +35,7 @@ paddle_b.penup()
 #a podição inicial do paddle_b
 paddle_b.goto(350, 0)
 
-##Ball
+##bola
 ball = turtle.Turtle()
 #velocidade da animação
 #no 0 é o maximo de vel. de animação
@@ -42,7 +43,7 @@ ball.speed(0)
 ball.shape("circle")
 ball.color("white")
 ball.penup()
-#a podição inicial do ball
+#a posição inicial da bola
 ball.goto(0, 0)
 #pra bola de mover
 #variação de pixel q a bola se move, quando ela se move
@@ -76,6 +77,7 @@ def paddle_b_down():
 
 
 #keyboard binding
+# controles/comandos para jogar
 
 wn.listen()
 wn.onkeypress(paddle_a_up, "w")
@@ -83,7 +85,7 @@ wn.onkeypress(paddle_a_down, "s")
 wn.onkeypress(paddle_b_up, "Up")
 wn.onkeypress(paddle_b_down, "Down")
 
-#moving the ball
+
 ###########fazendo um placar
 # Pen 
 pen = turtle.Turtle()
@@ -92,6 +94,7 @@ pen.color("white")
 pen.penup()
 pen.hideturtle()
 pen.goto(0,260)
+
 pen.write("Player A : {}  Player B : {}".format(score_a,score_b), align="center", font=("Courier",25,"normal"))
 
 # main game loop - onde vai todas as paradas do jogo
@@ -102,7 +105,7 @@ while True:
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
 
-    #fazendo as bordas
+    #fazendo as bordas da tela do jogo
     if ball.ycor() > 290:
         ball.sety(290 )
         ball.dy *= -1
@@ -117,7 +120,7 @@ while True:
         score_a += 1
         pen.clear()
         pen.write("Player A : {}  Player B : {}".format(score_a,score_b), align="center", font=("Courier",25,"normal"))
-
+        
     if ball.xcor() < -390:
         ball.goto(0,0)
         ball.dx *= -1     
